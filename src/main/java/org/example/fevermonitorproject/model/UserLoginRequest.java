@@ -1,4 +1,4 @@
-package org.example.fevermonitorproject.controller;
+package org.example.fevermonitorproject.model;
 
 import lombok.Getter;
 import lombok.Setter;

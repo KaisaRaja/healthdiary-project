@@ -1,6 +1,7 @@
 package org.example.fevermonitorproject.controller;
 
 import org.example.fevermonitorproject.model.User;
+import org.example.fevermonitorproject.model.UserLoginRequest;
 import org.example.fevermonitorproject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
