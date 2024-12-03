@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin // Allow Vue frontend
@@ -17,11 +19,14 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserLoginRequest request) {
-        User user = userRepository.findByUsername(request.getUsername());
+        Optional<User> optionalUser = userRepository.findByUsername(request.getUsername());
 
-        if (user != null && user.getPassword().equals(request.getPassword())) {
-            // Generate a real token (e.g., JWT) here
-            return ResponseEntity.ok("{ \"token\": \"mock-token\" }");
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            if (user.getPassword().equals(request.getPassword())) {
+                // Generate a real token (e.g., JWT) here
+                return ResponseEntity.ok("{ \"token\": \"mock-token\" }");
+            }
         }
         return ResponseEntity.status(401).body("Invalid username or password");
     }

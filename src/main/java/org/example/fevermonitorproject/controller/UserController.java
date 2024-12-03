@@ -3,6 +3,8 @@ package org.example.fevermonitorproject.controller;
 import org.example.fevermonitorproject.model.User;
 import org.example.fevermonitorproject.repository.UserRepository;
 import org.example.fevermonitorproject.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -78,6 +80,13 @@ public class UserController {
     public String updateUser(@PathVariable("id") Long id, @RequestBody User user) {
         return userService.updateUser(id, user);
     }
-
+    @PostMapping("/register")
+    public ResponseEntity<String> registerUser(@RequestBody User user) {
+        if (userService.register(user)) {
+            return ResponseEntity.ok("User registered successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already exists.");
+        }
+    }
 
 }

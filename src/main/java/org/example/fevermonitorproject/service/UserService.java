@@ -25,11 +25,16 @@ public class UserService {
     }
 
 
-    public boolean register(String username, String password) {
-        if (getAllUsers().equals(username)) {
-            System.out.println("Kasutajanimi on juba kasutuses, palun proovi uuesti!");
-            return false; // User already exists
+    public boolean register(User user) {
+        // Check if the username already exists
+        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+            System.out.println("Username is already taken. Please try again!");
+            return false; // Registration failed
         }
+
+        // Save the new user to the database
+        userRepository.save(user);
+        System.out.println("User registered successfully: " + user.getUsername());
         return true; // Registration successful
     }
 
