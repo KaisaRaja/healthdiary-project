@@ -1,5 +1,6 @@
 package org.example.fevermonitorproject.repository;
 
+
 import org.example.fevermonitorproject.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -2,6 +2,10 @@ package org.example.fevermonitorproject.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,6 +19,7 @@ import lombok.*;
 
 public class User {
 
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -26,9 +31,6 @@ public class User {
     private String lastName;
     private String email;
     private Long dateOfBirth;
-    public Long getId() {
-        return id;
-    }
 
     public void setId(Long id) {
         this.id = id;

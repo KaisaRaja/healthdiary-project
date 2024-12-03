@@ -7,14 +7,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/api/auth")
 @CrossOrigin // Allow Vue frontend
-public class LoginController {
+public class AuthController {
+
+    @Autowired
     private UserRepository userRepository;
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserLoginRequest request) {
-        User user = UserRepository.findByUsername(request.getUsername());
+        User user = userRepository.findByUsername(request.getUsername());
 
         if (user != null && user.getPassword().equals(request.getPassword())) {
             // Generate a real token (e.g., JWT) here
