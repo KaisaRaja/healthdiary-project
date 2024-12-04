@@ -16,21 +16,19 @@ import jakarta.persistence.GenerationType;
 @Entity
 @Table(name = "users")
 
-
 public class User {
 
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
     public String username;
     public String password;
-
     private String firstName;
     private String lastName;
     private String email;
     private Long dateOfBirth;
+
 
     public void setId(Long id) {
         this.id = id;
@@ -52,3 +50,4 @@ public class User {
         this.password = password;
     }
 }
+
