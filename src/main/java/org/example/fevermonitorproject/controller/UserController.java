@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
+
     private final UserService userService;
     private final UserRepository userRepository;
 
@@ -76,10 +77,11 @@ public class UserController {
         return userService.addUser(user);
     }
 
-    @PutMapping("/update-user-details/{id}")
-    public String updateUser(@PathVariable("id") Long id, @RequestBody User user) {
-        return userService.updateUser(id, user);
-    }
+    //@PutMapping("/update-user-details/{id}")
+    //public String updateUser(@PathVariable("id") Long id, @RequestBody User user) {
+    //    return userService.updateUser(id, user);
+    //}
+
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody User user) {
         if (userService.register(user)) {
@@ -88,5 +90,4 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already exists.");
         }
     }
-
 }
