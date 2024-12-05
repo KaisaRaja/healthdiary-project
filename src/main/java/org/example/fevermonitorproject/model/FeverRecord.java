@@ -11,6 +11,7 @@ public class FeverRecord {
     @jakarta.persistence.Id
     @Id // TODO vaata , kas on õige import
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     private LocalDateTime time;
     private double temperature;

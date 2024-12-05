@@ -1,60 +1,42 @@
 package org.example.fevermonitorproject.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
+@Getter
 @Entity
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private LocalDateTime createdAt;
-    private LocalDateTime closedAt; // Nullable when the patient is still active
+    @Setter
+    private String patientFullName;
 
-    @Column(nullable = true) // Optional field
+    @Setter
+    @Column()
     private LocalDate dateOfBirth;
 
-    // Constructors, getters, and setters
+    @Setter
+    private double weight;
+
+    private LocalDateTime createdAt;
+
+    @Setter
+    private LocalDateTime closedAt;
+
+    @Setter
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false) // Link to the User table
+    private User owner;
+
     public Patient() {
         this.createdAt = LocalDateTime.now(); // Automatically set the createdAt timestamp
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getClosedAt() {
-        return closedAt;
-    }
-
-    public void setClosedAt(LocalDateTime closedAt) {
-        this.closedAt = closedAt;
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
 }
