@@ -19,11 +19,11 @@ public class FeverRecordController {
     public ResponseEntity<FeverRecord> addFeverRecord(@RequestBody FeverRecord record) {
         return ResponseEntity.ok(feverRecordService.addFeverRecord(record));
     }
-//    @DeleteMapping("/api/fever/delete")
+//    @DeleteMapping("/api/fever/delete/${id}")
 //    public ResponseEntity<FeverRecord> deleteFeverRecord(@RequestBody FeverRecord record) {
 //    return ResponseEntity.ok(feverRecordService.deleteFeverRecord(record));
 //    }
-    @PostMapping("/api/fever/update")
+    @PutMapping("/api/fever/update/${id}")
     public void updateFeverRecord(@RequestBody FeverRecord record) {
         feverRecordService.updateFeverRecord(record);
     }
