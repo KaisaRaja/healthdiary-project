@@ -34,14 +34,16 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found: " + username));
     }
 
-    public User login (UserLoginRequest request) {
+    public Long login (UserLoginRequest request) {
         Optional<User> optionalUser = userRepository.findByUsername(request.getUsername());
 
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             if (user.getPassword().equals(request.getPassword())) {
-                return user;            }
-        }return null;
+                return user.getId();
+            }
+        }
+        return null;
     }
 
 

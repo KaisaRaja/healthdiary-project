@@ -10,12 +10,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/fever")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class FeverRecordController {
     @Autowired
     private FeverRecordService feverRecordService;
 
 
-    @PostMapping("/api/fever/new")
+    @PostMapping("new")
     public ResponseEntity<FeverRecord> addFeverRecord(@RequestBody FeverRecord record) {
         return ResponseEntity.ok(feverRecordService.addFeverRecord(record));
     }
@@ -23,12 +24,12 @@ public class FeverRecordController {
 //    public ResponseEntity<FeverRecord> deleteFeverRecord(@RequestBody FeverRecord record) {
 //    return ResponseEntity.ok(feverRecordService.deleteFeverRecord(record));
 //    }
-    @PutMapping("/api/fever/update/${id}")
-    public void updateFeverRecord(@RequestBody FeverRecord record) {
+    @PutMapping("update/{id}")
+    public void updateFeverRecord(@RequestBody FeverRecord record, Long id) {
         feverRecordService.updateFeverRecord(record);
     }
 
-    @GetMapping("/api/fever/all")
+    @GetMapping("all")
     public List<FeverRecord> getAllFeverRecords() {
         return feverRecordService.getAllFeverRecords();
     }

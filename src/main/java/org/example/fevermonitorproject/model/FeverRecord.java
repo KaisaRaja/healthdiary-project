@@ -1,23 +1,20 @@
 package org.example.fevermonitorproject.model;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
 @Table(name = "fever_record")
 public class FeverRecord {
-    @jakarta.persistence.Id
-    @Id // TODO vaata , kas on õige import
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
+
     private LocalDateTime time;
-    private double temperature;
+    private String temperature;
     private Timestamp closedAt;
 
     public void setId(Long id) {

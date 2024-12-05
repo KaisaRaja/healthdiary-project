@@ -1,6 +1,5 @@
 package org.example.fevermonitorproject.controller;
 
-import org.example.fevermonitorproject.model.User;
 import org.example.fevermonitorproject.model.UserLoginRequest;
 import org.example.fevermonitorproject.repository.UserRepository;
 import org.example.fevermonitorproject.service.UserService;
@@ -23,12 +22,13 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody UserLoginRequest request) {
-        User user = userService.login(request); // Replace with your login logic
+        Long userId = userService.login(request);
 
-        if (user != null) {
-            Map<String, User> response = new HashMap<>();
-            response.put("user", user);
-            return ResponseEntity.ok(response); // Spring converts Map to JSON
+        if (userId != null) {
+            Map<String, String> response = new HashMap<>();
+            response.put("userId", String.valueOf(userId));
+            response.put("token", "mock-token");
+            return ResponseEntity.ok(response);
         }
 
         return ResponseEntity.status(401).body("Invalid username or password");

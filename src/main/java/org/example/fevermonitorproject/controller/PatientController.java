@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/patients")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PatientController {
     private final PatientService service;
     private final UserService userService;
@@ -59,13 +60,9 @@ public class PatientController {
         }
     }
 
-    @GetMapping("/all-patients")
-    public ResponseEntity<List<Patient>> getUserPatients() {
-        User currentUser = userService.getAuthenticatedUser(); // Replace with your logic
-        if (currentUser != null) {
-            return ResponseEntity.ok(service.getPatientsByUser(currentUser.getId()));
-        }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    @GetMapping("/all-patients/by-user-id/{id}")
+    public ResponseEntity<List<Patient>> getUserPatients(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getPatientsByUser(id));
     }
 
 }
