@@ -45,7 +45,7 @@ public class UserService {
     }
 
     public String addUser(User user) {
-        // userRepository.save(user);
+       userRepository.save(user);
         // users.add(user);
         printUsers();
         System.out.println("User with ID " + user.username + " has been added");

@@ -1,6 +1,7 @@
 package org.example.fevermonitorproject.service;
 
 import org.example.fevermonitorproject.model.Patient;
+import org.example.fevermonitorproject.model.User;
 import org.example.fevermonitorproject.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,6 @@ public class PatientService {
     public Patient addPatient(Patient patient) {
         return repository.save(patient);
     }
-
     // View all patients
     public List<Patient> getAllPatients() {
         return repository.findAll();

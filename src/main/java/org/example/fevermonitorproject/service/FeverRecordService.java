@@ -4,6 +4,7 @@ import org.example.fevermonitorproject.repository.FeverRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -12,10 +13,20 @@ public class FeverRecordService {
     private FeverRecordRepository feverRecordRepository;
 
     public FeverRecord addFeverRecord(FeverRecord record) {
+
         return feverRecordRepository.save(record);
     }
 
     public List<FeverRecord> getAllFeverRecords() {
+
         return feverRecordRepository.findAll();
+    }
+//    public FeverRecord deleteFeverRecord(FeverRecord record) {
+//
+//        return feverRecordRepository.save(record);
+//    }
+    public void updateFeverRecord(FeverRecord record) {
+        var timestamp = LocalDateTime.now();
+        feverRecordRepository.markAsClosed(record.getId(), timestamp);
     }
 }

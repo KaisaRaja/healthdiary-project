@@ -15,12 +15,20 @@ public class FeverRecordController {
     private FeverRecordService feverRecordService;
 
 
-    @PostMapping
+    @PostMapping("/api/fever/new")
     public ResponseEntity<FeverRecord> addRecord(@RequestBody FeverRecord record) {
         return ResponseEntity.ok(feverRecordService.addFeverRecord(record));
     }
+//    @DeleteMapping("/api/fever/delete")
+//    public ResponseEntity<FeverRecord> deleteRecord(@RequestBody FeverRecord record) {
+//    return ResponseEntity.ok(feverRecordService.deleteFeverRecord(record));
+//    }
+    @PostMapping("/api/fever/update")
+    public void updateRecord(@RequestBody FeverRecord record) {
+        feverRecordService.updateFeverRecord(record);
+    }
 
-    @GetMapping
+    @GetMapping("/api/fever/all")
     public List<FeverRecord> getAllRecords() {
         return feverRecordService.getAllFeverRecords();
     }
