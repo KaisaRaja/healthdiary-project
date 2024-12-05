@@ -4,6 +4,8 @@ import org.example.fevermonitorproject.model.User;
 import org.example.fevermonitorproject.model.UserLoginRequest;
 import org.example.fevermonitorproject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,15 +17,31 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public boolean login (UserLoginRequest request) {
+
+    public User getAuthenticatedUser() {
+        // Fetch the username of the currently logged-in user
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        // Fetch the User object from the database
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found: " + username));
+    }
+
+    public User login (UserLoginRequest request) {
         Optional<User> optionalUser = userRepository.findByUsername(request.getUsername());
 
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             if (user.getPassword().equals(request.getPassword())) {
-                return true;// Generate a real token (e.g., JWT) here
-            }
-        }return false;
+                return user;            }
+        }return null;
     }
 
 
@@ -48,8 +66,8 @@ public class UserService {
        userRepository.save(user);
         // users.add(user);
         printUsers();
-        System.out.println("User with ID " + user.username + " has been added");
-        return "User " + user.username + " has been added successfully";
+        System.out.println("User with ID " + user.getUsername() + " has been added");
+        return "User " + user.getUsername() + " has been added successfully";
     }
 
     public List<User> getAllUsers() {

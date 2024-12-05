@@ -1,8 +1,11 @@
 package org.example.fevermonitorproject.controller;
 
+import jakarta.validation.Valid;
 import org.example.fevermonitorproject.model.Patient;
+import org.example.fevermonitorproject.model.User;
 import org.example.fevermonitorproject.service.PatientService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.fevermonitorproject.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,38 +14,58 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/patients")
 public class PatientController {
-    @Autowired
-    private PatientService service;
+    private final PatientService service;
+    private final UserService userService;
+
+    public PatientController(PatientService service, UserService userService) {
+        this.service = service;
+        this.userService = userService;
+    }
 
     @PostMapping
     public ResponseEntity<Patient> addPatient(@RequestBody Patient patient) {
-        return ResponseEntity.ok(service.addPatient(patient));
-    }
-
-    @GetMapping
-    public List<Patient> getAllPatients() {
-        return service.getAllPatients();
+        User currentUser = userService.getAuthenticatedUser(); // Replace with your logic
+        if (currentUser != null) {
+            return ResponseEntity.ok(service.addPatient(patient, currentUser));
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Patient> getPatientById(@PathVariable Long id) {
         return service.getPatientById(id)
                 .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
+
     @PutMapping("/{id}")
-    public ResponseEntity<Patient> updatePatient(@PathVariable Long id, @RequestBody Patient updatedPatient) {
+    public ResponseEntity<?> updatePatient(@PathVariable Long id, @Valid @RequestBody Patient updatedPatient) {
         try {
-            return ResponseEntity.ok(service.updatePatient(id, updatedPatient));
+            Patient patient = service.updatePatient(id, updatedPatient);
+            return ResponseEntity.ok(patient);
         } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> removePatient(@PathVariable Long id) {
-        service.removePatient(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<?> removePatient(@PathVariable Long id) {
+        try {
+            service.removePatient(id);
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
+
+    @GetMapping("/all-patients")
+    public ResponseEntity<List<Patient>> getUserPatients() {
+        User currentUser = userService.getAuthenticatedUser(); // Replace with your logic
+        if (currentUser != null) {
+            return ResponseEntity.ok(service.getPatientsByUser(currentUser.getId()));
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+
 }

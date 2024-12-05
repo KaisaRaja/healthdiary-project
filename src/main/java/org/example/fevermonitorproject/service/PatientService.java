@@ -16,12 +16,15 @@ public class PatientService {
     private PatientRepository repository;
 
     // Add a new patient
-    public Patient addPatient(Patient patient) {
+    public Patient addPatient(Patient patient, User owner) {
+        patient.setOwner(owner); // Set the owner
         return repository.save(patient);
     }
     // View all patients
     public List<Patient> getAllPatients() {
-        return repository.findAll();
+        return repository.findAll().stream()
+                .filter(patient -> patient.getClosedAt() == null) // Exclude soft-deleted patients
+                .toList();
     }
 
     // Find a patient by ID
@@ -32,13 +35,15 @@ public class PatientService {
     // Modify a patient
     public Patient updatePatient(Long id, Patient updatedPatient) {
         return repository.findById(id).map(patient -> {
-            patient.setName(updatedPatient.getName());
+            patient.setPatientFullName(updatedPatient.getPatientFullName());
             if (updatedPatient.getDateOfBirth() != null) {
                 patient.setDateOfBirth(updatedPatient.getDateOfBirth());
             }
+            patient.setWeight(updatedPatient.getWeight());
             return repository.save(patient);
         }).orElseThrow(() -> new RuntimeException("Patient not found with id " + id));
     }
+
 
     // Remove a patient (soft delete by setting closedAt timestamp)
     public void removePatient(Long id) {
@@ -47,4 +52,8 @@ public class PatientService {
             repository.save(patient);
         });
     }
+    public List<Patient> getPatientsByUser(Long userId) {
+        return repository.findByOwnerId(userId);
+    }
+
 }
