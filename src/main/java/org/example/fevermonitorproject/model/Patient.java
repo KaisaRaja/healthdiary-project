@@ -5,11 +5,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "patients")
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private LocalDateTime createdAt;
     private LocalDateTime closedAt; // Nullable when the patient is still active
