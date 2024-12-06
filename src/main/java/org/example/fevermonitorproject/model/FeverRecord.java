@@ -18,15 +18,19 @@ public class FeverRecord {
     @Getter
     private Long id;
 
-    private String temperature;
+    private String temperature; // komakoha tõttu
 
     private LocalDateTime time;
     @Setter
     private LocalDateTime createdAt;
     @Getter
     private LocalDateTime closedAt;
-
     public void setClosedAt(LocalDateTime now) {
     }
+
+    @ManyToOne
+    @JoinColumn(name= "patient-id")
+    private Patient patient;
+
 }
 

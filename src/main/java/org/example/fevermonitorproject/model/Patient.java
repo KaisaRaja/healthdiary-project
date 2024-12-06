@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -37,4 +38,6 @@ public class Patient {
         this.createdAt = LocalDateTime.now(); // Automatically set the createdAt timestamp
     }
 
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private List<FeverRecord> feverRecords = new ArrayList<>();
 }

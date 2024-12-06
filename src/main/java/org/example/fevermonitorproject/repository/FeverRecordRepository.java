@@ -13,5 +13,5 @@ public interface FeverRecordRepository extends JpaRepository<FeverRecord, Long> 
     @Modifying
      @Query("UPDATE FeverRecord f SET f.closedAt = :closedAt WHERE f.id = :id")
     void markAsClosed(@Param("id") Long id, @Param("closedAt") LocalDateTime closedAt);
-    List<FeverRecord> findFeverRecordById(Long feverRecordId);
+    List<FeverRecord> findByPatientId(Long patientId);
 }

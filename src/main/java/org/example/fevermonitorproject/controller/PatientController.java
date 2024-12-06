@@ -1,6 +1,7 @@
 package org.example.fevermonitorproject.controller;
 
 import jakarta.validation.Valid;
+import org.example.fevermonitorproject.model.FeverRecord;
 import org.example.fevermonitorproject.model.Patient;
 import org.example.fevermonitorproject.model.User;
 import org.example.fevermonitorproject.service.PatientService;
@@ -64,5 +65,4 @@ public class PatientController {
     public ResponseEntity<List<Patient>> getUserPatients(@PathVariable Long id) {
         return ResponseEntity.ok(service.getPatientsByUser(id));
     }
-
 }
