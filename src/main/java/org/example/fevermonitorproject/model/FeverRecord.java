@@ -1,6 +1,7 @@
 package org.example.fevermonitorproject.model;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -9,19 +10,23 @@ import java.time.LocalDateTime;
 @Getter
 @Table(name = "fever_record")
 public class FeverRecord {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter
+    @Getter
     private Long id;
 
-    private LocalDateTime time;
     private String temperature;
-    private Timestamp closedAt;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private LocalDateTime time;
+    @Setter
+    private LocalDateTime createdAt;
+    @Getter
+    private LocalDateTime closedAt;
 
-    public Long getId() {
-        return id;
+    public void setClosedAt(LocalDateTime now) {
     }
 }
+

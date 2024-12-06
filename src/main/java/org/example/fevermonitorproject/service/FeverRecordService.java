@@ -16,15 +16,18 @@ public class FeverRecordService {
         return feverRecordRepository.save(record);
     }
 
-//    public FeverRecord deleteFeverRecord(FeverRecord record) {
-//
-//        return feverRecordRepository.save(record);
-//    }
+//public FeverRecord deleteFeverRecord(Long record) {
+//    return feverRecordRepository.save(id);
+//}
     public void updateFeverRecord(FeverRecord record) {
         var timestamp = LocalDateTime.now();
         feverRecordRepository.markAsClosed(record.getId(), timestamp);
     }
     public List<FeverRecord> getAllFeverRecords() {
         return feverRecordRepository.findAll();
+    }
+
+    public List<FeverRecord> getFeverRecordsByPatient(Long feverRecordId) {
+        return feverRecordRepository.findFeverRecordById(feverRecordId);
     }
 }
