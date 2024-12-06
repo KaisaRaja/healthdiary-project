@@ -27,7 +27,7 @@ public class FeverRecordService {
         return feverRecordRepository.findAll();
     }
 
-    public List<FeverRecord> getFeverRecordsByPatient(Long feverRecordId) {
-        return feverRecordRepository.findByPatientId(feverRecordId);
+    public List<FeverRecord> getPatientFeverRecords(Long id) {
+        return feverRecordRepository.findByPatientId(id);
     }
 }
