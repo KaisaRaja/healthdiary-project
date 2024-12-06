@@ -25,10 +25,10 @@ public class FeverRecordController {
     public ResponseEntity<FeverRecord> addFeverRecord(@RequestBody FeverRecord record) {
         return ResponseEntity.ok(feverRecordService.addFeverRecord(record));
     }
-    @DeleteMapping("delete/{id}")
-    public ResponseEntity<FeverRecord> deleteFeverRecord(@PathVariable Long id) {
-    return ResponseEntity.ok(feverRecordService.deleteFeverRecord(id));
-    }
+//    @DeleteMapping("delete/{id}")
+//    public ResponseEntity<FeverRecord> deleteFeverRecord(@PathVariable Long id) {
+//    return ResponseEntity.ok(feverRecordService.deleteFeverRecord(id));
+//    }
     @PutMapping("update/{id}")
     public void updateFeverRecord(@RequestBody FeverRecord record, Long id) {
         feverRecordService.updateFeverRecord(record);
