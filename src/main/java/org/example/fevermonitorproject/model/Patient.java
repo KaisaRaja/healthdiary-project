@@ -38,6 +38,6 @@ public class Patient {
         this.createdAt = LocalDateTime.now(); // Automatically set the createdAt timestamp
     }
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-    private List<FeverRecord> feverRecords = new ArrayList<>();
+//    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+//    private List<FeverRecord> feverRecords = new ArrayList<>();
 }

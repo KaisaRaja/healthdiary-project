@@ -28,9 +28,7 @@ public class FeverRecord {
     public void setClosedAt(LocalDateTime now) {
     }
 
-    @ManyToOne
-    @JoinColumn(name= "patient-id")
-    private Patient patient;
+    private Long patientId;
 
 }
 
