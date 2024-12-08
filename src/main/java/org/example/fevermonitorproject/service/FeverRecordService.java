@@ -16,12 +16,9 @@ public class FeverRecordService {
         return feverRecordRepository.save(record);
     }
 
-//public FeverRecord deleteFeverRecord(Long record) {
-//    return feverRecordRepository.save(id);
-//}
-    public void updateFeverRecord(FeverRecord record) {
-        var timestamp = LocalDateTime.now();
-        feverRecordRepository.markAsClosed(record.getId(), timestamp);
+    public void updateFeverRecord(Long id) {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        feverRecordRepository.markAsClosed(id, localDateTime);
     }
     public List<FeverRecord> getAllFeverRecords() {
         return feverRecordRepository.findAll();

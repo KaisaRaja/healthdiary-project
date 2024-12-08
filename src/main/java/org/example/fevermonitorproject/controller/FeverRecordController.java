@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
@@ -28,13 +29,9 @@ public class FeverRecordController {
         return ResponseEntity.ok(feverRecordService.addFeverRecord(record));
     }
 
-//    @DeleteMapping("delete/{id}")
-//    public ResponseEntity<FeverRecord> deleteFeverRecord(@PathVariable Long id) {
-//    return ResponseEntity.ok(feverRecordService.deleteFeverRecord(id));
-//    }
-    @PutMapping("update/{id}")
-    public void updateFeverRecord(@RequestBody FeverRecord record, Long id) {
-        feverRecordService.updateFeverRecord(record);
+    @PutMapping("delete/{id}")
+    public void updateFeverRecord(@PathVariable Long id) {
+        feverRecordService.updateFeverRecord(id);
     }
 
     @GetMapping("all")
@@ -43,14 +40,6 @@ public class FeverRecordController {
     }
     @GetMapping("/patients/{patientId}/fever-records")
     public List<FeverRecord> getPatientFeverRecords(@PathVariable Long patientId) {
-        return feverRecordRepository.findByPatientId(patientId);
+        return feverRecordRepository.findOpenRecordsByPatientId(patientId);
     }
 }
-// TODO : vaata üle see chati antud koodijupp, ütles, et see võiks sobida ka patsiendikontrollerisse
-//@PostMapping("/patients/{patientId}/fever-records")
-//public FeverRecord addFeverRecord(@PathVariable Long patientId, @RequestBody FeverRecord feverRecord) {
-//    Patient patient = patientRepository.findById(patientId)
-//            .orElseThrow(() -> new NoSuchElementException("Patient not found"));
-//    feverRecord.setPatient(patient);
-//    return feverRecordRepository.save(feverRecord);
-//}
