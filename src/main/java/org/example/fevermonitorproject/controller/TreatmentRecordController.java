@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/treatment")
-@CrossOrigin(origins = "http://localhost:3000") // Lubab Frontendi ühenduse
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TreatmentRecordController {
 
     @Autowired
