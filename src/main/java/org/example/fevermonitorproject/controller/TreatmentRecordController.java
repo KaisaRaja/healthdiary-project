@@ -33,7 +33,7 @@ public class TreatmentRecordController {
     public List<TreatmentRecord> getAllTreatmentRecords() {
         return treatmentRecordService.getAllTreatmentRecords();
     }
-    @GetMapping("/patients{patientId}/treatment-records")
+    @GetMapping("/patients/{patientId}/treatment-records")
     public List<TreatmentRecord> getPatientTreatmentRecords(@PathVariable Long patientId) {
         return treatmentRecordRepository.findByPatientIdOrderByTimestampDesc(patientId);
     }
