@@ -3,7 +3,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,8 +26,22 @@ public class FeverRecord {
     private LocalDateTime closedAt;
     public void setClosedAt(LocalDateTime now) {
     }
-
     private Long patientId;
 
+    private String medicationName;
+    private String medicationDosage;
+    public String getMedicationName() {
+        return medicationName;
+    }
+    public void setMedicationName(String medicationName) {
+        this.medicationName = medicationName;
+    }
+    public String getMedicationDosage() {
+        return medicationDosage;
+    }
+
+    public void setMedicationDosage(String medicationDosage) {
+        this.medicationDosage = medicationDosage;
+    }
 }
 

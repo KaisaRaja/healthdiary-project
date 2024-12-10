@@ -8,21 +8,14 @@ import java.util.List;
 
 @Getter
 @Entity
-@Table(name = "treatment_record")
-public class TreatmentRecord {
+@Table(name = "symptom")
+public class Symptom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Long patientId;
-
-    private String medicine;
-
-    private String dosage;
-
-    @ElementCollection
-    private List<String> symptoms;
+    private String name;
 
     private LocalDateTime timestamp;
     private String status;  // e.g., 'ACTIVE', 'CLOSED'
@@ -45,28 +38,11 @@ public class TreatmentRecord {
         this.patientId = patientId;
     }
 
-    public String getMedicine() {
-        return medicine;
+    public String getName() {
+        return name;
     }
-
-    public void setMedicine(String medicine) {
-        this.medicine = medicine;
-    }
-
-    public String getDosage() {
-        return dosage;
-    }
-
-    public void setDosage(String dosage) {
-        this.dosage = dosage;
-    }
-
-    public List<String> getSymptoms() {
-        return symptoms;
-    }
-
-    public void setSymptoms(List<String> symptoms) {
-        this.symptoms = symptoms;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public LocalDateTime getTimestamp() {
