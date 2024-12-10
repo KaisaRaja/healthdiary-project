@@ -1,5 +1,6 @@
 package org.example.fevermonitorproject.service;
 
+import org.example.fevermonitorproject.model.FeverRecord;
 import org.example.fevermonitorproject.model.TreatmentRecord;
 import org.example.fevermonitorproject.repository.TreatmentRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +20,15 @@ public class TreatmentRecordService {
         record.setTimestamp(LocalDateTime.now()); // Määrab automaatselt ajatempli
         return treatmentRecordRepository.save(record);
     }
-
-    public List<TreatmentRecord> getTreatmentRecordsForPatient(Long patientId) {
-        return treatmentRecordRepository.findByPatientIdOrderByTimestampDesc(patientId);
-    }
     // Uuendab raviandmeid ja märgib need sulgemiseks
-    public TreatmentRecord updateTreatmentRecord(Long id) {
+    public void updateTreatmentRecord(Long id) {
         LocalDateTime localDateTime = LocalDateTime.now();
         treatmentRecordRepository.markAsClosed(id, localDateTime);
-
-        // Siin võiks olla kood, mis uuendab muid andmeid, kui vaja
-        return treatmentRecordRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("TreatmentRecord not found with id " + id));
+    }
+    public List<TreatmentRecord> getAllTreatmentRecords() {
+        return treatmentRecordRepository.findAll();
+    }
+    public List<TreatmentRecord> getTreatmentRecordsForPatient(Long patientId) {
+        return treatmentRecordRepository.findByPatientIdOrderByTimestampDesc(patientId);
     }
 }
