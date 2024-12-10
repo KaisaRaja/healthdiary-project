@@ -13,6 +13,12 @@ public class FeverRecordService {
     private FeverRecordRepository feverRecordRepository;
 
     public FeverRecord addFeverRecord(FeverRecord record) {
+        if (record.getMedicationName() == null) {
+            record.setMedicationName("");
+        }
+        if (record.getMedicationDosage() == null) {
+            record.setMedicationDosage("");
+        }
         return feverRecordRepository.save(record);
     }
 

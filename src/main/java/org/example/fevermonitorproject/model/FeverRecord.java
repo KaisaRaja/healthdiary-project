@@ -39,7 +39,6 @@ public class FeverRecord {
     public String getMedicationDosage() {
         return medicationDosage;
     }
-
     public void setMedicationDosage(String medicationDosage) {
         this.medicationDosage = medicationDosage;
     }
