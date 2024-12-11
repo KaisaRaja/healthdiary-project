@@ -21,6 +21,6 @@ public interface SymptomRepository extends JpaRepository<Symptom, Long> {
     @Query("UPDATE Symptom tr SET tr.status = 'CLOSED', tr.closeDate = :closeDate WHERE tr.id = :id")
     void markAsClosed(@Param("id") Long id, @Param("closeDate") LocalDateTime closeDate);
 
-    // Eeldatav meetod raviandmete leidmiseks
-    Optional<Symptom> findById(Long id);
+    @Query("SELECT f FROM Symptom f WHERE f.patientId = :id AND f.closeDate IS NULL")
+    List<Symptom> findOpenById(@Param("id") Long id);
 }

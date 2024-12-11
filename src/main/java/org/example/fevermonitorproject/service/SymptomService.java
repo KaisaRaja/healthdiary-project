@@ -63,6 +63,6 @@ public class SymptomService {
         return symptomRepository.findAll();
     }
     public List<Symptom> getSymptomsForPatient(Long patientId) {
-        return symptomRepository.findByPatientIdOrderByTimestampDesc(patientId);
+        return symptomRepository.findOpenById(patientId);
     }
 }

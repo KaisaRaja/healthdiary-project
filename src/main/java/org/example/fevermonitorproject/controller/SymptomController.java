@@ -5,6 +5,7 @@ import org.example.fevermonitorproject.model.Symptom;
 import org.example.fevermonitorproject.repository.SymptomRepository;
 import org.example.fevermonitorproject.service.SymptomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,6 +38,6 @@ public class SymptomController {
     }
     @GetMapping("/patients/{patientId}/symptom-records")
     public List<Symptom> getPatientSymptoms(@PathVariable Long patientId) {
-        return symptomRepository.findByPatientIdOrderByTimestampDesc(patientId);
+        return symptomService.getSymptomsForPatient(patientId);
     }
 }
