@@ -1,10 +1,10 @@
 package org.example.fevermonitorproject.controller;
 
+import org.example.fevermonitorproject.model.DtoSymptom;
 import org.example.fevermonitorproject.model.Symptom;
 import org.example.fevermonitorproject.repository.SymptomRepository;
 import org.example.fevermonitorproject.service.SymptomService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +24,8 @@ public class SymptomController {
     }
 
     @PostMapping("/new")
-    public List<Symptom> saveSymptoms(@RequestBody List<String> symptomNames) {
-        return symptomService.saveSymptoms(symptomNames);
+    public void saveSymptoms(@RequestBody DtoSymptom symptom) {
+        symptomService.saveSymptoms(symptom);
     }
     @PutMapping("/delete/{id}")
     public void updateSymptom(@PathVariable Long id) {
