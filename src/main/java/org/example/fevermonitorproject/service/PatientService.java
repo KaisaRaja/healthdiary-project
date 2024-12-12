@@ -54,7 +54,7 @@ public class PatientService {
         });
     }
     public List<Patient> getPatientsByUser(Long userId) {
-       return repository.findByUserId(userId);
+       return repository.findAllOpenByUserId(userId);
     }
 
 }
