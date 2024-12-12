@@ -25,22 +25,32 @@ public class SymptomService {
         }
         StringBuilder symptoms = new StringBuilder();
 
-// Loop through the list of specific symptoms
         List<DtoSymptom.SpecificSymptom> specificSymptomList = symptom.getSpecificSymptomList();
-        for (DtoSymptom.SpecificSymptom s : specificSymptomList) {
+
+// Filter out unwanted symptoms (e.g., with id "7")
+        for (int i = 0; i < specificSymptomList.size(); i++) {
+            DtoSymptom.SpecificSymptom s = specificSymptomList.get(i);
             if (!s.getId().equalsIgnoreCase("7")) {
-                // If the StringBuilder is not empty, add a comma before appending the symptom name
-                if (symptoms.length() > 0) {
+                String symptomName = s.getName();
+
+                // Change the last two symptoms to have a lowercase first letter
+                if (i >= specificSymptomList.size() - 2) {
+                    symptomName = symptomName.substring(0,1).toLowerCase() + symptomName.substring(1);
+                }
+
+                symptoms.append(symptomName);
+
+                // Add a comma if this is not the last element in the filtered list
+                if (i < specificSymptomList.size() - 1) {
                     symptoms.append(", ");
                 }
-                symptoms.append(s.getName());
             }
         }
 
 // Add other symptoms if they exist
         if (symptom.getOtherSymptom() != null) {
             if (symptoms.length() > 0) {
-                symptoms.append(", ");
+                symptoms.append(" ");
             }
             symptoms.append(symptom.getOtherSymptom());
         }
