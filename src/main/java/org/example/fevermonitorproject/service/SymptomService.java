@@ -33,13 +33,15 @@ public class SymptomService {
             if (!s.getId().equalsIgnoreCase("7")) {
                 String symptomName = s.getName();
 
-                // Change the last two symptoms to have a lowercase first letter
-                if (i >= specificSymptomList.size() - 2) {
-                    symptomName = symptomName.substring(0,1).toLowerCase() + symptomName.substring(1);
+                // Muudame esimese sümptomi algustähe suureks
+                if (i == 0) {
+                    symptomName = symptomName.substring(0, 1).toUpperCase() + symptomName.substring(1).toLowerCase();
+                } else {
+                    // Ülejäänud sümptomid jäävad väikse algustähega
+                    symptomName = symptomName.substring(0, 1).toLowerCase() + symptomName.substring(1).toLowerCase();
                 }
 
                 symptoms.append(symptomName);
-
                 // Add a comma if this is not the last element in the filtered list
                 if (i < specificSymptomList.size() - 1) {
                     symptoms.append(", ");
