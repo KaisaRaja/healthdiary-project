@@ -1,4 +1,5 @@
 package org.example.fevermonitorproject.model;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,21 +25,27 @@ public class FeverRecord {
     private LocalDateTime createdAt;
     @Getter
     private LocalDateTime closedAt;
+
     public void setClosedAt(LocalDateTime now) {
     }
+
     private Long patientId;
 
     private String medicationName;
     private String medicationDosage;
+
     public String getMedicationName() {
         return medicationName;
     }
+
     public void setMedicationName(String medicationName) {
         this.medicationName = medicationName;
     }
+
     public String getMedicationDosage() {
         return medicationDosage;
     }
+
     public void setMedicationDosage(String medicationDosage) {
         this.medicationDosage = medicationDosage;
     }

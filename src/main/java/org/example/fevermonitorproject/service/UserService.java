@@ -7,11 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Service
 public class UserService {
@@ -36,7 +35,7 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found: " + username));
     }
 
-    public Long login (UserLoginRequest request) {
+    public Long login(UserLoginRequest request) {
         Optional<User> optionalUser = userRepository.findByUsername(request.getUsername());
 
         if (optionalUser.isPresent()) {
@@ -55,7 +54,6 @@ public class UserService {
             System.out.println("Username is already taken. Please try again!");
             return false; // Registration failed
         }
-        // Save the new user to the database
         userRepository.save(user);
         System.out.println("User registered successfully: " + user.getUsername());
         return true; // Registration successful
@@ -67,8 +65,7 @@ public class UserService {
     }
 
     public String addUser(User user) {
-       userRepository.save(user);
-        // users.add(user);
+        userRepository.save(user);
         printUsers();
         System.out.println("User with ID " + user.getUsername() + " has been added");
         return "User " + user.getUsername() + " has been added successfully";
@@ -77,24 +74,7 @@ public class UserService {
     public List<User> getAllUsers() {
         List<User> userList = new ArrayList<>();
         return userRepository.findAll();
-        // TODO !
-        // Pane sinna userrepository
     }
-
-    //public String updateUser(Long id, User user) {
-    //    userRepository.save(user);
-    //    for (User existingUser : getAllUsers()) {
-    //        if (existingUser.getId().equals(id)) {
-    //            existingUser.setFirstName(user.username);
-    //            existingUser.setLastName(user.username);
-    //            existingUser.setEmail(user.getEmail());
-    //            System.out.println("E-mail updated with: " + existingUser.getEmail());
-    //            return "User with ID " + id + " has been updated.";
-    //        }
-//
-    //    }
-    //    return "User with ID " + id + " was not found";
-    //}
 
     public String deleteUserById(Long userId) {
         userRepository.deleteById(userId);
@@ -108,7 +88,7 @@ public class UserService {
     }
 
     public User getUserById(Long userId) {
-        Optional<User> user =  userRepository.findById(userId);
+        Optional<User> user = userRepository.findById(userId);
         return user.orElse(null);
     }
 

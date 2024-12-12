@@ -27,29 +27,22 @@ public class SymptomService {
 
         List<DtoSymptom.SpecificSymptom> specificSymptomList = symptom.getSpecificSymptomList();
 
-// Filter out unwanted symptoms (e.g., with id "7")
         for (int i = 0; i < specificSymptomList.size(); i++) {
             DtoSymptom.SpecificSymptom s = specificSymptomList.get(i);
             if (!s.getId().equalsIgnoreCase("7")) {
                 String symptomName = s.getName();
 
-                // Muudame esimese sümptomi algustähe suureks
                 if (i == 0) {
                     symptomName = symptomName.substring(0, 1).toUpperCase() + symptomName.substring(1).toLowerCase();
                 } else {
-                    // Ülejäänud sümptomid jäävad väikse algustähega
                     symptomName = symptomName.substring(0, 1).toLowerCase() + symptomName.substring(1).toLowerCase();
                 }
-
                 symptoms.append(symptomName);
-                // Add a comma if this is not the last element in the filtered list
                 if (i < specificSymptomList.size() - 1) {
                     symptoms.append(", ");
                 }
             }
         }
-
-// Add other symptoms if they exist
         if (symptom.getOtherSymptom() != null) {
             if (symptoms.length() > 0) {
                 symptoms.append(" ");
@@ -57,7 +50,6 @@ public class SymptomService {
             symptoms.append(symptom.getOtherSymptom());
         }
 
-// Convert StringBuilder to a String and assign it to symptoms (or return it as needed)
         String result = symptoms.toString();
 
         Symptom saveSymptom = new Symptom();
@@ -66,7 +58,6 @@ public class SymptomService {
         saveSymptom.setPatientId(symptom.getPatientId());
         symptomRepository.save(saveSymptom);
     }
-    // Uuendab raviandmeid ja märgib need sulgemiseks
     public void updateSymptom(Long id) {
         LocalDateTime localDateTime = LocalDateTime.now();
         symptomRepository.markAsClosed(id, localDateTime);

@@ -62,11 +62,6 @@ public class UserController {
         return userService.addUser(user);
     }
 
-    //@PutMapping("/update-user-details/{id}")
-    //public String updateUser(@PathVariable("id") Long id, @RequestBody User user) {
-    //    return userService.updateUser(id, user);
-    //}
-
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody User user) {
         if (userService.register(user)) {
