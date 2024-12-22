@@ -1,5 +1,6 @@
 package org.example.fevermonitorproject.controller;
 
+import org.example.fevermonitorproject.model.ChangePasswordRequest;
 import org.example.fevermonitorproject.model.User;
 import org.example.fevermonitorproject.repository.UserRepository;
 import org.example.fevermonitorproject.service.UserService;
@@ -70,5 +71,17 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already exists.");
         }
     }
-
+    @PutMapping("/change-password/{userId}")
+    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordRequest request, @PathVariable Long userId) {
+        boolean isChanged = userService.changePassword(
+                userId,
+                request.getCurrentPassword(),
+                request.getNewPassword()
+        );
+        if (isChanged) {
+            return ResponseEntity.ok("Password changed successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password change failed.");
+        }
+    }
 }

@@ -4,9 +4,13 @@ import org.example.fevermonitorproject.model.User;
 import org.example.fevermonitorproject.model.UserLoginRequest;
 import org.example.fevermonitorproject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +21,8 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     public User getAuthenticatedUser() {
@@ -98,5 +104,20 @@ public class UserService {
 
     public void printUsers() {
         System.out.println(getAllUsers());
+    }
+
+    public boolean changePassword(Long userId, String currentPassword, String newPassword) {
+       User user = getUserById(userId);
+
+        if (!currentPassword.equalsIgnoreCase(user.getPassword())) {
+            return false; // Password mismatch
+        }
+
+        user.setPassword(newPassword);
+        userRepository.save(user); // Persist the change
+
+        return true; // Successfully updated
+
+
     }
 }
