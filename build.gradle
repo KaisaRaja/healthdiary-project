@@ -22,8 +22,8 @@ configurations {
 
 repositories {
     mavenCentral()
-    maven { url "https://repo1.maven.org/maven2/" } // Default Maven Central
-    maven { url "https://repo.spring.io/release" } // Spring's repository
+    maven { url "https://repo1.maven.org/maven2/" } 
+    maven { url "https://repo.spring.io/release" } 
 }
 
 
