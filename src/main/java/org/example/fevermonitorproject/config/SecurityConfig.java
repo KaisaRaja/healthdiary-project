@@ -24,10 +24,10 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/**").permitAll()
                 .requestMatchers(HttpMethod.PUT, "/**").permitAll()
                 .requestMatchers(HttpMethod.DELETE, "/**").permitAll()
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Allow OPTIONS requests
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() 
                 .anyRequest().authenticated()
         );
-        // Disabling CSRF (use with caution)
+    
         http.csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
