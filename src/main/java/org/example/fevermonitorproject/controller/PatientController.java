@@ -25,7 +25,7 @@ public class PatientController {
 
     @PostMapping
     public ResponseEntity<Patient> addPatient(@RequestBody Patient patient) {
-        User currentUser = userService.getUserById((patient.getUserId())); // Replace with your logic
+        User currentUser = userService.getUserById((patient.getUserId()));
         if (currentUser != null) {
             return ResponseEntity.ok(service.addPatient(patient));
         }
