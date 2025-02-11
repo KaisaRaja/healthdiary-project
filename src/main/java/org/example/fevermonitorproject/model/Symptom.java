@@ -17,10 +17,10 @@ public class Symptom {
     private String name;
 
     private LocalDateTime timestamp;
-    private String status;  // e.g., 'ACTIVE', 'CLOSED'
+    private String status;  
     private LocalDateTime closeDate;  // Ajastatud kuupäev sulgemiseks
 
-    // Getters and setters
+    
     public Long getId() {
         return id;
     }
