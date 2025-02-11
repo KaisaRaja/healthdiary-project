@@ -4,7 +4,7 @@ public class ChangePasswordRequest {
     private String currentPassword;
     private String newPassword;
 
-    // Getters and setters
+  
     public String getCurrentPassword() {
         return currentPassword;
     }
