@@ -10,7 +10,7 @@ public class DtoSymptom {
     private List<SpecificSymptom> specificSymptomList;
     private LocalDateTime time;
 
-    // Constructor
+    
     public DtoSymptom(Long patientId, String otherSymptom, List<SpecificSymptom> specificSymptomList, LocalDateTime time) {
         this.patientId = patientId;
         this.otherSymptom = otherSymptom;
@@ -18,7 +18,7 @@ public class DtoSymptom {
         this.time = time;
     }
 
-    // Getters and setters
+    
     public Long getPatientId() {
         return patientId;
     }
@@ -51,18 +51,18 @@ public class DtoSymptom {
         this.time = time;
     }
 
-    // SpecificSymptom class
+    
     public static class SpecificSymptom {
         private String name;
         private String id;
 
-        // Constructor
+        
         public SpecificSymptom(String name, String id) {
             this.name = name;
             this.id = id;
         }
 
-        // Getters and setters
+        
         public String getName() {
             return name;
         }
