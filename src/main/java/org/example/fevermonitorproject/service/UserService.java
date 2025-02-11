@@ -26,7 +26,7 @@ public class UserService {
 
 
     public User getAuthenticatedUser() {
-        // Fetch the username of the currently logged-in user
+        
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         String username;
@@ -36,7 +36,7 @@ public class UserService {
             username = principal.toString();
         }
 
-        // Fetch the User object from the database
+    
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found: " + username));
     }
@@ -55,14 +55,14 @@ public class UserService {
 
 
     public boolean register(User user) {
-        // Check if the username already exists
+        
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             System.out.println("Username is already taken. Please try again!");
-            return false; // Registration failed
+            return false; 
         }
         userRepository.save(user);
         System.out.println("User registered successfully: " + user.getUsername());
-        return true; // Registration successful
+        return true; 
     }
 
     public String getUserByName(String username) {
@@ -110,13 +110,13 @@ public class UserService {
        User user = getUserById(userId);
 
         if (!currentPassword.equalsIgnoreCase(user.getPassword())) {
-            return false; // Password mismatch
+            return false; 
         }
 
         user.setPassword(newPassword);
-        userRepository.save(user); // Persist the change
+        userRepository.save(user); 
 
-        return true; // Successfully updated
+        return true; 
 
 
     }
