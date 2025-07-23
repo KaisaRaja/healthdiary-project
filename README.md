@@ -1,4 +1,4 @@
-# FeverMonitor
+# Healthdiary Project
 
 FeverMonitor on veebirakendus, mille eesmärk on võimaldada patsiendi kehatemperatuuri ja ravimite manustamise jälgimist.
 
@@ -45,8 +45,8 @@ See repositoorium on originaalversioon koos kogu arenduslooga.
 ---
 
 ## Kontakt
-
-Küsimuste või koostöösoovi korral: kaisaraja@gmail.com
+Autorid: Kaisa Raja ja Christo Klettenberg
+Projekti eesmärk: Vali IT lõpuprojekt
 
 ---
 
